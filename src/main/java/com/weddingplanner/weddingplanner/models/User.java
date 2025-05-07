@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "user")
@@ -17,6 +18,7 @@ public abstract class User {
     @Column(name = "id")
     private int id;
 
+    @NotEmpty(message = "This field cannot be empty")
     private String name;
     private int age;
     private String username;
