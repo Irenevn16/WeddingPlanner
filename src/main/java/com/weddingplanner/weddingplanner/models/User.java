@@ -1,6 +1,8 @@
 package com.weddingplanner.weddingplanner.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +22,17 @@ public abstract class User {
 
     @NotEmpty(message = "This field cannot be empty")
     private String name;
+
+    @Min(value = 0, message = "Age must be a positive number")
     private int age;
+
+    @NotEmpty(message = "This field cannot be empty")
     private String username;
+
+    @NotEmpty(message = "This field cannot be empty")
     private String password;
+
+    @NotNull(message = "This field cannot be empty")
+    @Enumerated(EnumType.STRING)
     private Role role;
 }
