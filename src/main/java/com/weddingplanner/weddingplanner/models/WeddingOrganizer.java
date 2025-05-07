@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "wedding_organizer")
@@ -17,6 +16,7 @@ public class WeddingOrganizer extends User {
     @OneToMany(mappedBy = "weddingOrganizer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Wedding> weddings;
 
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_ADMIN;
+    public WeddingOrganizer(){
+        setRole(Role.ROLE_ADMIN);
+    }
 }

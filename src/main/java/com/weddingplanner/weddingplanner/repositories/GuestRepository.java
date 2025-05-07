@@ -7,8 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GuestRepository extends JpaRepository<Guest, Integer> {
 
-    public Guest addGuest();
-    public Guest updateGuestCompannion();
-    public Guest deleteGuest();
-    public Guest getGuestInfo();
 }

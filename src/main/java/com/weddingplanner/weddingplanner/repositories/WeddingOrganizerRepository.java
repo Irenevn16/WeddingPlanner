@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeddingOrganizerRepository extends JpaRepository<WeddingOrganizer, Integer> {
-    public WeddingOrganizer addWeddingOrganizer();
+
 }

@@ -6,10 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeddingRepository extends JpaRepository<Wedding, Integer> {
-    public Wedding addWedding();
-    public Wedding updateWeddingInfo();
-    public Wedding updateWeddingDate();
-    public Wedding updateWeddingPlace();
-    public Wedding deleteWedding();
-    public Wedding findById();
+
+
 }

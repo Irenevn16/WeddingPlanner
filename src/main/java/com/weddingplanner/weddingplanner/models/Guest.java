@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "guest")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Guest extends User{
 
@@ -28,6 +27,7 @@ public class Guest extends User{
     @JoinColumn(name = "invited_by")
     private Couple invitedBy;
 
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_GUEST;
+    public Guest() {
+        setRole(Role.ROLE_GUEST);
+    }
 }

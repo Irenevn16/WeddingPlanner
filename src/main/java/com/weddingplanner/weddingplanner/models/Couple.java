@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 @Table(name = "couple")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 
 public class Couple extends User {
@@ -22,6 +21,7 @@ public class Couple extends User {
     @OneToMany(mappedBy = "invitedBy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Guest> guests;
 
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_EDITOR;
+    public Couple(){
+        setRole(Role.ROLE_EDITOR);
+    }
 }

@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CoupleRepository extends JpaRepository<Couple, Integer> {
-    public Couple addCouple();
-    public Couple deleteCouple();
+
 }

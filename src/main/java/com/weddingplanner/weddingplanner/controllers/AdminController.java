@@ -20,8 +20,7 @@ public class AdminController {
     @Autowired
     private WeddingOrganizerRepository weddingOrganizerRepository;
 
-    @Autowired
-    private WeddingDto weddingDto;
+    private final WeddingDto weddingDto = new WeddingDto();
 
     @GetMapping("/weddings")
     public List<Wedding> getAllWeddings(){
