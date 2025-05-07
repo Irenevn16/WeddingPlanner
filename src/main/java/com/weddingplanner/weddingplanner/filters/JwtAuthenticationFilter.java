@@ -1,4 +1,4 @@
-package com.weddingplanner.weddingplanner.filters;
+/*package com.weddingplanner.weddingplanner.filters;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -7,3 +7,4 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 }
+*/

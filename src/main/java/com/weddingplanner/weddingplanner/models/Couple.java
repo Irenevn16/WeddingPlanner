@@ -23,5 +23,5 @@ public class Couple extends User {
     private List<Guest> guests;
 
     @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_USER;
+    private Role role = Role.ROLE_EDITOR;
 }
