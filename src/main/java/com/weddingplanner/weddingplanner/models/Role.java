@@ -1,6 +1,7 @@
 package com.weddingplanner.weddingplanner.models;
 
 public enum Role {
-    FAMILY,
-    FRIENDS
+    ROLE_ADMIN,
+    ROLE_USER,
+    ROLE_GUEST
 }
