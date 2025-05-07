@@ -1,4 +1,4 @@
 package com.weddingplanner.weddingplanner.controllers;
 
-public class UserController {
+public class EditorController {
 }
