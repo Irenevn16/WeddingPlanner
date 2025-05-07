@@ -11,4 +11,5 @@ public interface WeddingRepository extends JpaRepository<Wedding, Integer> {
     public Wedding updateWeddingDate();
     public Wedding updateWeddingPlace();
     public Wedding deleteWedding();
+    public Wedding findById();
 }
