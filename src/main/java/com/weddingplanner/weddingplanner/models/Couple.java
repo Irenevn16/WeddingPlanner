@@ -21,4 +21,7 @@ public class Couple extends User {
 
     @OneToMany(mappedBy = "invitedBy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Guest> guests;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
 }

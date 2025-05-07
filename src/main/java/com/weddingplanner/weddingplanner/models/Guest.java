@@ -27,4 +27,7 @@ public class Guest extends User{
     @ManyToOne
     @JoinColumn(name = "invited_by")
     private Couple invitedBy;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_GUEST;
 }
