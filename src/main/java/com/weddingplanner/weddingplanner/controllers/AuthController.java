@@ -1,5 +1,5 @@
 package com.weddingplanner.weddingplanner.controllers;
-
+/*
 import com.weddingplanner.weddingplanner.models.*;
 import com.weddingplanner.weddingplanner.repositories.CoupleRepository;
 import com.weddingplanner.weddingplanner.repositories.GuestRepository;
@@ -75,3 +75,4 @@ public class AuthController {
     }
 
 }
+*/

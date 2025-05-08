@@ -15,7 +15,7 @@ import java.util.List;
 public class Couple extends User {
 
     @ManyToOne
-    @JoinColumn(name = "wedding_id", nullable = false)
+    @JoinColumn(name = "wedding_id")
     private Wedding wedding;
 
     @OneToMany(mappedBy = "invitedBy", cascade = CascadeType.ALL, orphanRemoval = true)

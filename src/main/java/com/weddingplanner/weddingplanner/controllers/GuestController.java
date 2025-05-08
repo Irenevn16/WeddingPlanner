@@ -62,6 +62,6 @@ public class GuestController {
         guest.setBringsCompanion(false);
         guestRepository.save(guest);
 
-        return ResponseEntity.ok("You are not bringing a companion to the wedding.")
+        return ResponseEntity.ok("You are not bringing a companion to the wedding.");
     }
 }

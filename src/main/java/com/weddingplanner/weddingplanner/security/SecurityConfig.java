@@ -1,5 +1,5 @@
 package com.weddingplanner.weddingplanner.security;
-
+/*
 import com.weddingplanner.weddingplanner.filters.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,3 +15,4 @@ public class SecurityConfig {
 
 
 }
+*/
