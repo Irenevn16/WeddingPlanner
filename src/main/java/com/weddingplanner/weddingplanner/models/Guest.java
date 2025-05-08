@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "guest")
@@ -16,7 +15,8 @@ public class Guest extends User{
     @JoinColumn(name = "wedding_id", nullable = false)
     private Wedding wedding;
 
-    @NotNull(message = "This field cannot be empty")
+
+    //@NotNull(message = "This field cannot be empty")
     @Enumerated(EnumType.STRING)
     private GuestType guestType;
 

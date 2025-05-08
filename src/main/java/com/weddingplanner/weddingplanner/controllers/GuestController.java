@@ -3,14 +3,13 @@ package com.weddingplanner.weddingplanner.controllers;
 import com.weddingplanner.weddingplanner.dto.GuestDto;
 import com.weddingplanner.weddingplanner.dto.WeddingDto;
 import com.weddingplanner.weddingplanner.models.Guest;
+import com.weddingplanner.weddingplanner.models.GuestType;
 import com.weddingplanner.weddingplanner.models.Wedding;
 import com.weddingplanner.weddingplanner.repositories.GuestRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/guest")
@@ -31,7 +30,7 @@ public class GuestController {
         guestDto.setId(guest.getId());
         guestDto.setName(guest.getName());
         guestDto.setAge(guest.getAge());
-        guestDto.setGuestType(guest.getGuestType().name());
+        //guestDto.setGuestType(guest.getGuestType(GuestType.FAMILY).name());
         guestDto.setBringsCompanion(guest.getBringsCompanion());
         guestDto.setWeddingId(guest.getWedding().getId());
         guestDto.setInvitedBy(guest.getInvitedBy());
