@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class CreateUsersTest {
+public class CreateUsersAndRelationateTest {
 
     @Autowired
     CoupleRepository coupleRepository;
@@ -45,10 +45,10 @@ public class CreateUsersTest {
     @Test
     public void createWeddingOrganizer(){ //FUNCIONA
         WeddingOrganizer testWeddingOrganizer = new WeddingOrganizer();
-        testWeddingOrganizer.setName("Juancho");
-        testWeddingOrganizer.setUsername("Ju88");
+        testWeddingOrganizer.setName("Paloma");
+        testWeddingOrganizer.setUsername("Palom");
         testWeddingOrganizer.setPassword("123");
-        testWeddingOrganizer.setAge(54);
+        testWeddingOrganizer.setAge(31);
 
         weddingOrganizerRepository.save(testWeddingOrganizer);
     }
@@ -74,7 +74,18 @@ public class CreateUsersTest {
         testGuest.setGuestType(GuestType.FAMILY);
 
         guestRepository.save(testGuest);
-        //guestRepository.delete(testGuest);
+        guestRepository.delete(testGuest);
+    }
+    @Test
+    public void assignWeddingToWeddingOrganizer(){
+        Optional<Wedding> weddingOptional = weddingRepository.findById(1);
+        Wedding wedding = weddingOptional.get();
+
+        Optional<WeddingOrganizer> weddingOrganizerOptional = weddingOrganizerRepository.findById(252);
+        WeddingOrganizer weddingOrganizer = weddingOrganizerOptional.get();
+
+        wedding.setWeddingOrganizer(weddingOrganizer);
+        weddingRepository.save(wedding);
     }
 
     @Test
