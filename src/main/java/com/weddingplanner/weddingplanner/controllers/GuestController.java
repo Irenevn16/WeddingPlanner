@@ -21,6 +21,8 @@ public class GuestController {
     @Autowired
     private WeddingRepository weddingRepository;
 
+
+
     @GetMapping("/{id}")
     public GuestDto getGuestInfo(@PathVariable int id) {
         Guest guest = guestRepository.findById(id)
