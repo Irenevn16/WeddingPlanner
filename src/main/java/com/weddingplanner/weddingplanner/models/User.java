@@ -13,8 +13,8 @@ import jakarta.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +33,7 @@ public abstract class User {
     @NotEmpty(message = "This field cannot be empty")
     private String password;
 
-    @NotNull(message = "This field cannot be empty")
+    //@NotNull(message = "This field cannot be empty")
     @Enumerated(EnumType.STRING)
     private Role role;
 }

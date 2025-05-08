@@ -1,8 +1,10 @@
 package com.weddingplanner.weddingplanner;
 import com.weddingplanner.weddingplanner.models.Couple;
 import com.weddingplanner.weddingplanner.models.Guest;
+import com.weddingplanner.weddingplanner.models.User;
 import com.weddingplanner.weddingplanner.models.Wedding;
 import com.weddingplanner.weddingplanner.repositories.CoupleRepository;
+import com.weddingplanner.weddingplanner.repositories.UserRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,6 +45,22 @@ public class CoupleTest {
 
     private Wedding testWedding;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    private User testUser;
+
+    public void createUser() {
+        testUser = new User();
+        testUser.setName("lUCIA");
+        testUser.setAge(30);
+        testUser.setUsername("L2");
+        testUser.setPassword("123");
+
+        testUser = userRepository.save(testUser);
+
+    }
+
     public void createWedding() {
         testWedding = new Wedding();
         testWedding.setId(1);
@@ -57,13 +75,13 @@ public class CoupleTest {
     public void setUp(){
     this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
     createWedding();
+    createUser();
+        System.out.println("user is: " + testUser);
     testCouple = new Couple();
-    testCouple.setName("Ana");
-    testCouple.setAge(30);
-    testCouple.setUsername("Ana1");
-    testCouple.setPassword("123");
-    testCouple.setRole(com.weddingplanner.weddingplanner.models.Role.ROLE_EDITOR);
+    testCouple.setId(testUser.getId());
+
     testCouple.setWedding(testWedding);
+        System.out.println("wedding associated is: " + testCouple.getWedding());
 
     testCouple = coupleRepository.save(testCouple);
     }
