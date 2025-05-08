@@ -18,8 +18,8 @@ public class Couple extends User {
     @JoinColumn(name = "wedding_id", nullable = false)
     private Wedding wedding;
 
-    @OneToMany(mappedBy = "invitedBy", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Guest> guests;
+    /*@OneToMany(mappedBy = "invitedBy")//, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Guest> guests;*/
 
     public Couple(){
         setRole(Role.ROLE_EDITOR);

@@ -1,4 +1,4 @@
 package com.weddingplanner.weddingplanner;
 
-public class PruebaTest {
+public class WeddingRepositoryTest {
 }

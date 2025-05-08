@@ -38,7 +38,7 @@ public class AuthController {
 
     @PostMapping("/register/user")
     public Couple registerUser(@RequestBody Couple couple) {
-        couple.setRole(Role.ROLE_USER);
+        couple.setRole(Role.ROLE_EDITOR);
         return coupleRepository.save(couple);
     }
 
@@ -47,7 +47,7 @@ public class AuthController {
         guest.setRole(Role.ROLE_GUEST);
         return guestRepository.save(guest);
     }
-    public ResponseEntity<String> login(@RequestBody User user) {
+   /* public ResponseEntity<String> login(@RequestBody User user) {
         Optional<User> optionalUser = UserService.findByUsername(user.getUsername());
 
         if (optionalUser.isPresent()) {
@@ -72,6 +72,6 @@ public class AuthController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
-    }
+    }*/
 
 }

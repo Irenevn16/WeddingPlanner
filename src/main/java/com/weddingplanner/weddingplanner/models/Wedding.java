@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -18,7 +20,6 @@ import java.time.LocalDate;
 public class Wedding {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -28,7 +29,7 @@ public class Wedding {
     private String place;
 
     @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Guest> guestList;
+    private Collection<Guest> guestList;
 
     @ManyToOne
     @JoinColumn(name = "wedding_organizer_id")
