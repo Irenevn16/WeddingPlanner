@@ -5,14 +5,11 @@ import com.weddingplanner.weddingplanner.repositories.CoupleRepository;
 import com.weddingplanner.weddingplanner.repositories.GuestRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingOrganizerRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingRepository;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -20,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class PruebaTest {
+public class CreateUsersTest {
 
     @Autowired
     CoupleRepository coupleRepository;
