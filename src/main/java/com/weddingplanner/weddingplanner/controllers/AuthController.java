@@ -1,9 +1,11 @@
 package com.weddingplanner.weddingplanner.controllers;
-/*
+
+import com.weddingplanner.weddingplanner.dto.AuthResponseDto;
 import com.weddingplanner.weddingplanner.models.*;
 import com.weddingplanner.weddingplanner.repositories.CoupleRepository;
 import com.weddingplanner.weddingplanner.repositories.GuestRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingOrganizerRepository;
+import com.weddingplanner.weddingplanner.services.JwtService;
 import com.weddingplanner.weddingplanner.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,12 @@ public class AuthController {
     @Autowired
     private GuestRepository guestRepository;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private JwtService jwtService;
+
     @PostMapping("/register/admin")
     public WeddingOrganizer registerAdmin(@RequestBody WeddingOrganizer weddingOrganizer) {
         weddingOrganizer.setRole(Role.ROLE_ADMIN);
@@ -38,7 +46,7 @@ public class AuthController {
 
     @PostMapping("/register/user")
     public Couple registerUser(@RequestBody Couple couple) {
-        couple.setRole(Role.ROLE_USER);
+        couple.setRole(Role.ROLE_EDITOR);
         return coupleRepository.save(couple);
     }
 
@@ -47,32 +55,41 @@ public class AuthController {
         guest.setRole(Role.ROLE_GUEST);
         return guestRepository.save(guest);
     }
-    public ResponseEntity<String> login(@RequestBody User user) {
-        Optional<User> optionalUser = UserService.findByUsername(user.getUsername());
+
+    public ResponseEntity<AuthResponseDto> login(@RequestBody User loginRequest) {
+        Optional<User> optionalUser = userService.findByUsername(loginRequest.getUsername());
 
         if (optionalUser.isPresent()) {
             //extraemos obj dentro de optional
             User foundUser = optionalUser.get();
             //comprobamos si la contra es correcta
-            if (UserService.checkPassword(foundUser, user.getPassword())) {
-                List<String> roleNames = foundUser.getRoles().stream()
-                        .map(role -> role.getName().name())
-                        .collect(Collectors.toList());
+            if (userService.checkPassword(foundUser, loginRequest.getPassword())) {
+                String role;
+                if (foundUser instanceof Guest) {
+                    role = "ROLE_GUEST";
+                } else if (foundUser instanceof Couple) {
+                    role = "ROLE_EDITOR";
+                } else if (foundUser instanceof WeddingOrganizer) {
+                    role = "ROLE_ADMIN";
+                } else {
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+                }
 
-                String token = jwtService.generateToken(foundUser.getUsername(), foundUser.getRoles().toString());
-                AuthResponseDto response = new AuthResponseDto();
-                response.setToken(token);
-                response.setUsername(foundUser.getUsername());
-                response.setRoles(roleNames);
+                String token = jwtService.generateToken(foundUser.getUsername(), role);
 
-                return ResponseEntity.ok(token);
+                AuthResponseDto response = AuthResponseDto.builder()
+                        .token(token)
+                        .username(foundUser.getUsername())
+                        .roles(List.of(role))
+                        .build();
+
+                return ResponseEntity.ok(response);
             } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect login");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-    }
 
+    }
 }
-*/
