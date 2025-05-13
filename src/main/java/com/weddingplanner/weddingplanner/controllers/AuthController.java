@@ -44,8 +44,8 @@ public class AuthController {
         return weddingOrganizerRepository.save(weddingOrganizer);
     }
 
-    @PostMapping("/register/user")
-    public Couple registerUser(@RequestBody Couple couple) {
+    @PostMapping("/register/editor")
+    public Couple registerEditor(@RequestBody Couple couple) {
         couple.setRole(Role.ROLE_EDITOR);
         return coupleRepository.save(couple);
     }
