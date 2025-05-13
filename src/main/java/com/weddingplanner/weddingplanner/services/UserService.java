@@ -10,9 +10,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    //public User updateUserInfo();
-    //    public User updateUserPassword();
-    //    public User updateUserUserName();
 
     @Autowired
     private UserRepository userRepository;

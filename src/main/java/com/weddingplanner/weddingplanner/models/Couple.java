@@ -1,5 +1,6 @@
 package com.weddingplanner.weddingplanner.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class Couple extends User {
     private Wedding wedding;
 
     @OneToMany(mappedBy = "invitedBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Guest> guests;
 
     public Couple(){

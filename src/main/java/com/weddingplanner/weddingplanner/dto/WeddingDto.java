@@ -15,5 +15,5 @@ public class WeddingDto {
     public LocalDate date;
     public String place;
     public WeddingOrganizer weddingOrganizer;
-    public List<Guest> guestList;
+   // public List<Guest> guestList;
 }

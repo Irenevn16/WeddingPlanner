@@ -4,18 +4,22 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JwtService {
     private static final String SECRET = "my_secret_key";
 
-    public String generateToken(String username, String roles) {
+    public String generateToken(String username, String role) {
         return JWT.create()
                 .withSubject(username)
-                .withClaim("roles", roles)
+                .withClaim("role", "ADMIN")
+                .withClaim("role", "GUEST")
+                .withClaim("role", "EDITOR")
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
                 .sign(Algorithm.HMAC256(SECRET));
@@ -38,6 +42,14 @@ public class JwtService {
     DecodedJWT jwt = JWT.require(Algorithm.HMAC256(SECRET))
             .build()
             .verify(token);
-    return jwt.getClaim("roles").asString();
+    String role = jwt.getClaim("role").asString();
+    if (role != null) {
+        return role;
+        }
+    List<String> roles = jwt.getClaim("roles").asList(String.class);
+    if (roles != null && !roles.isEmpty()) {
+        return roles.get(0);
+    }
+    return null;
     }
 }

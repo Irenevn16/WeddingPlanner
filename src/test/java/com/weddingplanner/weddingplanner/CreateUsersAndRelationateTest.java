@@ -8,6 +8,7 @@ import com.weddingplanner.weddingplanner.repositories.WeddingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -29,25 +30,30 @@ public class CreateUsersAndRelationateTest {
     WeddingOrganizerRepository weddingOrganizerRepository;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     GuestRepository guestRepository;
 
     @Test
     public void createCouple(){ //FUNCIONA
         Couple testCouple = new Couple();
-        testCouple.setName("Ana");
-        testCouple.setUsername("Ann5");
-        testCouple.setPassword("123");
-        testCouple.setAge(36);
+        testCouple.setName("Marta");
+        testCouple.setUsername("M12");
+        String encodedPassword = passwordEncoder.encode("123");
+        testCouple.setPassword(encodedPassword);
+        testCouple.setAge(27);
         coupleRepository.save(testCouple);
-        coupleRepository.delete(testCouple);
+        //coupleRepository.delete(testCouple);
     }
 
     @Test
     public void createWeddingOrganizer(){ //FUNCIONA
         WeddingOrganizer testWeddingOrganizer = new WeddingOrganizer();
-        testWeddingOrganizer.setName("Paloma");
-        testWeddingOrganizer.setUsername("Palom");
-        testWeddingOrganizer.setPassword("123");
+        testWeddingOrganizer.setName("Pepe");
+        testWeddingOrganizer.setUsername("Pepito");
+        String encodedPassword = passwordEncoder.encode("123");
+        testWeddingOrganizer.setPassword(encodedPassword);
         testWeddingOrganizer.setAge(31);
 
         weddingOrganizerRepository.save(testWeddingOrganizer);
@@ -56,10 +62,11 @@ public class CreateUsersAndRelationateTest {
     @Test
     public void createGuest(){ //FUNCIONA
         Guest testGuest = new Guest();
-        testGuest.setName("Mili");
-        testGuest.setUsername("Mili999");
-        testGuest.setPassword("123");
-        testGuest.setAge(52);
+        testGuest.setName("Anton");
+        testGuest.setUsername("Tonton");
+        String encodedPassword = passwordEncoder.encode("123");
+        testGuest.setPassword(encodedPassword);
+        testGuest.setAge(42);
 
         Optional<Wedding> weddingOptional = weddingRepository.findById(1);
         Wedding wedding = weddingOptional.get();
@@ -74,7 +81,7 @@ public class CreateUsersAndRelationateTest {
         testGuest.setGuestType(GuestType.FAMILY);
 
         guestRepository.save(testGuest);
-        guestRepository.delete(testGuest);
+        //guestRepository.delete(testGuest);
     }
     @Test
     public void assignWeddingToWeddingOrganizer(){
@@ -99,8 +106,10 @@ public class CreateUsersAndRelationateTest {
             couple = new Couple();
             couple.setName("Pau");
             couple.setUsername("pau_01");
+            // falta encriptar el password
             couple.setPassword("1234");
             couple = coupleRepository.save(couple);
+
         }
 
         Wedding wedding = new Wedding();

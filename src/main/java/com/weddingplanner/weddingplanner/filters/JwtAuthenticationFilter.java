@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -55,17 +56,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private Collection<GrantedAuthority> extractAuthorities(String rolesString) {
-        if (rolesString == null || rolesString.isEmpty()) {
+    private Collection<GrantedAuthority> extractAuthorities(String roleString) {
+        if (roleString == null || roleString.isEmpty()) {
             return Collections.emptyList();
         }
-        String roles = rolesString.replace("[", "").replace("]", "");
-        String[] roleArray = roles.split(", ");
-
-        return Arrays.stream(roleArray)
-                .map(String :: trim)
-                .map(SimpleGrantedAuthority :: new)
-                .collect(Collectors.toList());
+        String formattedRole = roleString.startsWith("ROLE_") ? roleString : "ROLE_" + roleString.toUpperCase();
+        return List.of(new SimpleGrantedAuthority(formattedRole));
     }
 
 }

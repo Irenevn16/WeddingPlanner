@@ -1,5 +1,6 @@
 package com.weddingplanner.weddingplanner.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ public class Guest extends User{
 
     @ManyToOne
     @JoinColumn(name = "wedding_id", nullable = false)
+    @JsonBackReference
     private Wedding wedding;
 
 
@@ -25,6 +27,7 @@ public class Guest extends User{
 
     @ManyToOne
     @JoinColumn(name = "invited_by")
+    @JsonBackReference
     private Couple invitedBy;
 
     public Guest() {

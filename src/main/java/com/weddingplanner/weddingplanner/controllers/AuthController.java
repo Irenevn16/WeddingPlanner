@@ -56,15 +56,17 @@ public class AuthController {
         return guestRepository.save(guest);
     }
 
+    @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody User loginRequest) {
         Optional<User> optionalUser = userService.findByUsername(loginRequest.getUsername());
-
         if (optionalUser.isPresent()) {
             //extraemos obj dentro de optional
             User foundUser = optionalUser.get();
+            System.out.println("EL PASSWORD: "+foundUser.getPassword());
             //comprobamos si la contra es correcta
             if (userService.checkPassword(foundUser, loginRequest.getPassword())) {
-                String role;
+
+               String role;
                 if (foundUser instanceof Guest) {
                     role = "ROLE_GUEST";
                 } else if (foundUser instanceof Couple) {
@@ -80,11 +82,12 @@ public class AuthController {
                 AuthResponseDto response = AuthResponseDto.builder()
                         .token(token)
                         .username(foundUser.getUsername())
-                        .roles(List.of(role))
+                        .role(List.of(role))
                         .build();
 
                 return ResponseEntity.ok(response);
             } else {
+                System.out.println("Wrong password");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }
         } else {
