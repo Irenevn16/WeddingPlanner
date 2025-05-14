@@ -1,0 +1,49 @@
+src/
+└── main/
+    └── java/
+        └── com/
+           └── weddingplanner/
+                    ├── controllers/
+                    │   ├── AdminController.java
+                    │   ├── AuthController.java
+                    │   ├── BasicController.java
+                    │   ├── CoupleController.java
+                    │   ├── GuestController.java
+                    │   └──  EditorController.java
+                    ├── dto/
+                    │   ├── AuthResponseDto.java
+                    │   ├── CoupleDto.java
+                    │   ├── EditorDto.java
+                    │   ├── GuestDto.java
+                    │   ├── WeddingDto.java
+                    │   └──  WeddingOrganizerDto.java
+                    ├── filters/
+                    │   └──JwtAuthenticationFilter.java
+                    ├── models/
+                    │   ├── Couple.java
+                    │   ├── GuestType.java
+                    │   ├── Role.java
+                    │   ├── Guest.java
+                    │   ├── Wedding.java
+                    │   └── WeddingOrganizer.java
+                    ├── repositories/
+                    │   ├── CoupleRepository.java
+                    │   ├── GuestRepository.java
+                    │   ├── UserRepository.java
+                    │   ├── WeddingRepository.java
+                    │   └──  WeddingOrganizerRepository.java
+                    ├── security/
+                    │   └──SecurityConfig.java
+                    ├── services/
+                    │   ├── UserService.java
+                    │   ├── GuestService.java
+                    │   ├── JwtService.java
+                    │   └── WeddingService.java
+                    └──  WeddingPlannerApplication/
+           └──  resources/
+        └──test/
+            └── com/
+                    ├── CreateUsersAndRelationateTest.java
+                    ├── MethodsTest.java
+                    ├── UserServiceTest.java
+                    └── WeddingPlannerApplicationTests.java

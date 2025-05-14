@@ -1,0 +1,41 @@
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('ADMIN', 'USER', 'GUEST') NOT NULL
+);
+CREATE TABLE wedding_organizer (
+    id INT PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE,
+    UNIQUE (id)
+);
+CREATE TABLE wedding (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE NOT NULL,
+    place VARCHAR(255) NOT NULL,
+    wedding_organizer_id INT,
+    FOREIGN KEY (wedding_organizer_id) REFERENCES wedding_organizer(id) ON DELETE SET NULL
+);
+CREATE TABLE couple (
+    id INT PRIMARY KEY,
+    wedding_id INT,
+    //name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (wedding_id) REFERENCES wedding(id) ON DELETE CASCADE
+);
+CREATE TABLE guest (
+    id INT PRIMARY KEY,
+    wedding_id INT,
+    guest_type ENUM('FAMILY', 'FRIENDS') NOT NULL,
+    brings_companion BOOLEAN DEFAULT TRUE,
+    invited_by INT,
+    FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (wedding_id) REFERENCES wedding(id) ON DELETE CASCADE,
+    FOREIGN KEY (invited_by) REFERENCES couple(id) ON DELETE SET NULL
+);
+CREATE TABLE guest_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type ENUM('FAMILY', 'FRIENDS') NOT NULL UNIQUE
+);
