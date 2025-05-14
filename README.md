@@ -12,6 +12,7 @@ datos y una autenticación de usuarios para proteger información sensible, que 
     📐 DIAGRAMA DE CLASES
 ![Diagrama de clases.png](Diagrama%20de%20clases.png)
     🚀 TECNOLOGIAS Y HERRAMIENTAS 🚀
+
 -Java 17
 
 -Spring Boot 3
