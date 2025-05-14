@@ -13,9 +13,9 @@ datos y una autenticación de usuarios para proteger información sensible, que 
 ![Diagrama de clases.png](Diagrama%20de%20clases.png)
     🚀 TECNOLOGIAS Y HERRAMIENTAS 🚀
 
--Java 17
+-Java 21
 
--Spring Boot 3
+-Spring Boot 
 
 -Jpa Hibernate
 
