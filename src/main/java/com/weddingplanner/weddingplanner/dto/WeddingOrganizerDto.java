@@ -10,5 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WeddingOrganizerDto {
-    public List<Wedding> weddings;
+    private int id;
+    private String name;
+    //public List<Wedding> weddings;
 }

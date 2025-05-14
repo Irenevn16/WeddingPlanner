@@ -38,11 +38,11 @@ public class CreateUsersAndRelationateTest {
     @Test
     public void createCouple(){ //FUNCIONA
         Couple testCouple = new Couple();
-        testCouple.setName("Marta");
-        testCouple.setUsername("M12");
+        testCouple.setName("Pablo");
+        testCouple.setUsername("Polxx");
         String encodedPassword = passwordEncoder.encode("123");
         testCouple.setPassword(encodedPassword);
-        testCouple.setAge(27);
+        testCouple.setAge(43);
         coupleRepository.save(testCouple);
         //coupleRepository.delete(testCouple);
     }
@@ -50,11 +50,11 @@ public class CreateUsersAndRelationateTest {
     @Test
     public void createWeddingOrganizer(){ //FUNCIONA
         WeddingOrganizer testWeddingOrganizer = new WeddingOrganizer();
-        testWeddingOrganizer.setName("Pepe");
-        testWeddingOrganizer.setUsername("Pepito");
+        testWeddingOrganizer.setName("Jimena");
+        testWeddingOrganizer.setUsername("Jime9");
         String encodedPassword = passwordEncoder.encode("123");
         testWeddingOrganizer.setPassword(encodedPassword);
-        testWeddingOrganizer.setAge(31);
+        testWeddingOrganizer.setAge(28);
 
         weddingOrganizerRepository.save(testWeddingOrganizer);
     }
@@ -62,23 +62,23 @@ public class CreateUsersAndRelationateTest {
     @Test
     public void createGuest(){ //FUNCIONA
         Guest testGuest = new Guest();
-        testGuest.setName("Anton");
-        testGuest.setUsername("Tonton");
+        testGuest.setName("Tere");
+        testGuest.setUsername("T88");
         String encodedPassword = passwordEncoder.encode("123");
         testGuest.setPassword(encodedPassword);
-        testGuest.setAge(42);
+        testGuest.setAge(79);
 
-        Optional<Wedding> weddingOptional = weddingRepository.findById(1);
+        Optional<Wedding> weddingOptional = weddingRepository.findById(3);
         Wedding wedding = weddingOptional.get();
         testGuest.setWedding(wedding);
 
         testGuest.setBringsCompanion(true);
 
-        Optional<Couple> coupleOptional = coupleRepository.findById(102);
+        Optional<Couple> coupleOptional = coupleRepository.findById(602);
         Couple couple = coupleOptional.get();
         testGuest.setInvitedBy(couple);
 
-        testGuest.setGuestType(GuestType.FAMILY);
+        testGuest.setGuestType(GuestType.FRIENDS);
 
         guestRepository.save(testGuest);
         //guestRepository.delete(testGuest);
@@ -98,7 +98,7 @@ public class CreateUsersAndRelationateTest {
     @Test
     public void createWeddingAndAssign() { //FUNCIONA
         // Buscar la pareja por username
-        Optional<Couple> coupleOpt = coupleRepository.findById(102); // el id de tu couple
+        Optional<Couple> coupleOpt = coupleRepository.findById(602); // el id de tu couple
         Couple couple;
         if (coupleOpt.isPresent()) {
             couple = coupleOpt.get();
@@ -113,11 +113,11 @@ public class CreateUsersAndRelationateTest {
         }
 
         Wedding wedding = new Wedding();
-        wedding.setDate(LocalDate.of(2025, 6, 15));
-        wedding.setPlace("Madrid");
+        wedding.setDate(LocalDate.of(2025, 9, 5));
+        wedding.setPlace("Toledo");
         wedding.setGuestList(Collections.emptyList());
 
-        Optional<WeddingOrganizer> weddingOrganizerOptional = weddingOrganizerRepository.findById(52);
+        Optional<WeddingOrganizer> weddingOrganizerOptional = weddingOrganizerRepository.findById(702);
         WeddingOrganizer weddingOrganizer = weddingOrganizerOptional.get();
         wedding.setWeddingOrganizer(weddingOrganizer); // Cambia esto si tienes wedding organizer
 
@@ -126,6 +126,6 @@ public class CreateUsersAndRelationateTest {
         couple.setWedding(savedWedding);
         coupleRepository.save(couple);
         assertNotNull(savedWedding.getId());
-        assertEquals("Madrid", savedWedding.getPlace());
+        assertEquals("Toledo", savedWedding.getPlace());
     }
 }

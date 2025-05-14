@@ -1,8 +1,10 @@
 package com.weddingplanner.weddingplanner.controllers;
 
 import com.weddingplanner.weddingplanner.dto.WeddingDto;
+import com.weddingplanner.weddingplanner.models.Couple;
 import com.weddingplanner.weddingplanner.models.Wedding;
 import com.weddingplanner.weddingplanner.models.WeddingOrganizer;
+import com.weddingplanner.weddingplanner.repositories.CoupleRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingOrganizerRepository;
 import com.weddingplanner.weddingplanner.repositories.WeddingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class AdminController {
     @Autowired
     private WeddingOrganizerRepository weddingOrganizerRepository;
 
+    @Autowired
+    private CoupleRepository coupleRepository;
+
     private final WeddingDto weddingDto = new WeddingDto();
 
     @GetMapping("/weddings")
@@ -44,8 +49,16 @@ public class AdminController {
         Wedding wedding = weddingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Wedding not found with id: " + id));
 
-        wedding.setPlace(dto.getPlace());
-        wedding.setDate(dto.getDate());
+        if (dto.getPlace() != null) {
+            wedding.setPlace(dto.getPlace());
+        }
+        if (dto.getDate() != null) {
+            wedding.setDate(dto.getDate());
+        }
+        Couple couple = coupleRepository.findById(dto.getCoupleId())
+                .orElseThrow(() -> new RuntimeException("Couple not found"));
+        couple.setWedding(wedding);
+        coupleRepository.save(couple);
 
         return weddingRepository.save(wedding);
     }

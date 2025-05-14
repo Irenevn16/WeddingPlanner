@@ -56,7 +56,7 @@ public class AuthController {
         return guestRepository.save(guest);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")  //FUNCIONA
     public ResponseEntity<AuthResponseDto> login(@RequestBody User loginRequest) {
         Optional<User> optionalUser = userService.findByUsername(loginRequest.getUsername());
         if (optionalUser.isPresent()) {
@@ -66,23 +66,23 @@ public class AuthController {
             //comprobamos si la contra es correcta
             if (userService.checkPassword(foundUser, loginRequest.getPassword())) {
 
-               String role;
+               List<String> roles;
                 if (foundUser instanceof Guest) {
-                    role = "ROLE_GUEST";
+                    roles = List.of("ROLE_GUEST");
                 } else if (foundUser instanceof Couple) {
-                    role = "ROLE_EDITOR";
+                    roles = List.of("ROLE_EDITOR");
                 } else if (foundUser instanceof WeddingOrganizer) {
-                    role = "ROLE_ADMIN";
+                    roles = List.of("ROLE_ADMIN");
                 } else {
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
                 }
 
-                String token = jwtService.generateToken(foundUser.getUsername(), role);
+                String token = jwtService.generateToken(foundUser.getUsername(), roles);
 
                 AuthResponseDto response = AuthResponseDto.builder()
                         .token(token)
                         .username(foundUser.getUsername())
-                        .role(List.of(role))
+                        .role(roles)
                         .build();
 
                 return ResponseEntity.ok(response);

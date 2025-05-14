@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Collection;
 import java.util.List;
 import java.time.LocalDate;
 @Entity
@@ -31,8 +32,14 @@ public class Wedding {
     @JsonManagedReference
     private List<Guest> guestList;
 
+    @OneToMany(mappedBy = "wedding", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Couple> couple;
+
     @ManyToOne
     @JoinColumn(name = "wedding_organizer_id")
     @JsonBackReference // No mostrará al wedding organizer en json
     private WeddingOrganizer weddingOrganizer;
+
+
 }

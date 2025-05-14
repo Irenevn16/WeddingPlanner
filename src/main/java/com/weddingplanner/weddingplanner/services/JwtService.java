@@ -14,14 +14,12 @@ import java.util.List;
 public class JwtService {
     private static final String SECRET = "my_secret_key";
 
-    public String generateToken(String username, String role) {
+    public String generateToken(String username, List<String> roles) {
         return JWT.create()
                 .withSubject(username)
-                .withClaim("role", "ADMIN")
-                .withClaim("role", "GUEST")
-                .withClaim("role", "EDITOR")
+                .withClaim("role", roles)
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60* 60 * 60 * 1000))
                 .sign(Algorithm.HMAC256(SECRET));
     }
     public boolean validateToken(String token) {
@@ -38,18 +36,19 @@ public class JwtService {
                 .verify(token)
                 .getSubject();
     }
-    public String extractRoles(String token) {
+    public List<String> extractRoles(String token) {
     DecodedJWT jwt = JWT.require(Algorithm.HMAC256(SECRET))
             .build()
             .verify(token);
     String role = jwt.getClaim("role").asString();
-    if (role != null) {
-        return role;
+    if (role != null && !role.isEmpty()) {
+        return List.of(role);
         }
+
     List<String> roles = jwt.getClaim("roles").asList(String.class);
     if (roles != null && !roles.isEmpty()) {
-        return roles.get(0);
+        return roles;
     }
-    return null;
+    return List.of();
     }
 }

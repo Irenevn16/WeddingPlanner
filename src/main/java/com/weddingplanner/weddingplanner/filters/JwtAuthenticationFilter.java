@@ -45,9 +45,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String username = jwtService.extractUsername(token);
-        String rolesString = jwtService.extractRoles(token);
+        List<String> roles = jwtService.extractRoles(token);
 
-        Collection<GrantedAuthority> authorities = extractAuthorities(rolesString);
+        Collection<GrantedAuthority> authorities = extractAuthorities(roles);
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
 
@@ -56,12 +56,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private Collection<GrantedAuthority> extractAuthorities(String roleString) {
-        if (roleString == null || roleString.isEmpty()) {
+    private Collection<GrantedAuthority> extractAuthorities(List<String> roles) {
+        if (roles == null || roles.isEmpty()) {
             return Collections.emptyList();
         }
-        String formattedRole = roleString.startsWith("ROLE_") ? roleString : "ROLE_" + roleString.toUpperCase();
-        return List.of(new SimpleGrantedAuthority(formattedRole));
+
+        return roles.stream()
+                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role.toUpperCase())
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
 }
