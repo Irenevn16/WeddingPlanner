@@ -10,8 +10,7 @@ El proyecto es una aplicación de back end diseñada en Java con Spring Boot, y 
 datos y una autenticación de usuarios para proteger información sensible, que se accede mediante tokens JWT.
 
     📐 DIAGRAMA DE CLASES
-![img.png](Diagrama de clases.png)
-
+![Diagrama de clases.png](Diagrama%20de%20clases.png)
     🚀 TECNOLOGIAS Y HERRAMIENTAS 🚀
 -Java 17
 
