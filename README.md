@@ -52,11 +52,33 @@ datos y una autenticación de usuarios para proteger información sensible, que 
     📁 Controladores y rutas 📁
 -Auth Controller: para iniciar sesión y registrar usuarios según su tipo.
 
+    ("/api/auth")
+    POST / ("/register/admin") Registra un usuario ADMIN
+    POST / ("/register/editor") Registra un usuario EDITOR
+    POST / ("/register/guest") Registra un usuario GUEST
+    POST / ("/login") Permite iniciar sesión con username y contraseña
+
 -Admin Controller: CRUD para bodas y usuarios (requiere rol ADMIN, es para Wedding Organizer)
+
+    ("/api/admin")
+    GET / ("/weddings") Muestra todas las bodas de la database
+    POST / ("/weddings") Crea una boda nueav 
+    PUT / ("/weddings/{id}") Actualiza la información de una boda
+    DELETE / ("/weddings/{id}") Borra una boda de la database
 
 -Editor Controller: permite a la pareja gestionar su boda e invitados.
 
+    ("api/editor")
+    GET / ("/{coupleID}/guests") Muestra lxs invitados de la boda de la persona usuaria
+    DELETE / ("/{coupleID}/guests/{guestID}") Permite eliminar un invitadx de la boda
+    GET / ("/{id}/wedding") Muestra la información de la boda
+
 -Guest Controller: permite a lxs invitadxs acceder a la información de la boda y modificar su acompañante.
+
+    ("api/guest")
+    GET / ("/{id}") Muestra la información de un invitadx
+    GET / ("/{id}/wedding") Muestra la información de la boda a la que se acude
+    PATCH / ("/{id}/companion") Permite editar el acompañante a la boda
 
     🔗 Enlaces 🔗
 -Trello: https://trello.com/invite/b/681a10787b0754ffa4a954f0/ATTI5c205d7d7c2d56b3408d6673daa8847b41589C61/weddingplanner.
