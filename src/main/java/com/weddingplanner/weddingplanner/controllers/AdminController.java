@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
     @Autowired
@@ -32,19 +31,18 @@ public class AdminController {
     private final WeddingDto weddingDto = new WeddingDto();
 
     @GetMapping("/weddings")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<Wedding> getAllWeddings() {
+     public List<Wedding> getAllWeddings() {
         return weddingRepository.findAll();
     }
 
     @PostMapping("/weddings")
-    @PreAuthorize("hasRole('ADMIN')")
+
     public Wedding createWedding(@RequestBody Wedding wedding) {
         return weddingRepository.save(wedding);
     }
 
     @PutMapping("/weddings/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+
     public Wedding updateWedding(@PathVariable int id, @RequestBody WeddingDto dto) {
         Wedding wedding = weddingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Wedding not found with id: " + id));
@@ -64,13 +62,14 @@ public class AdminController {
     }
 
     @DeleteMapping("/weddings/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteWedding(@PathVariable int id) {
+
+    public ResponseEntity<String> deleteWedding(@PathVariable int id) {
         if (weddingRepository.existsById(id)) {
             weddingRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("The wedding was deleted.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
     }
 }

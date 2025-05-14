@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/editor")
-@PreAuthorize("hasRole('EDITOR')")
+
 public class EditorController {
     @Autowired
     private CoupleRepository coupleRepository;
@@ -63,7 +63,7 @@ public class EditorController {
         guestRepository.delete(guest);
         return ResponseEntity.ok("Guest deleted");
     }
-    @GetMapping("/{id}/wedding")
+    @GetMapping("/{id}/wedding") //FUNCIONA
     public WeddingDto getWeddingInfo(@PathVariable int id){
         Couple couple = coupleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Couple not found with id: " + id));
@@ -74,6 +74,8 @@ public class EditorController {
         dto.setDate(wedding.getDate());
         dto.setPlace(wedding.getPlace());
         dto.setWeddingOrganizer(wedding.getWeddingOrganizer().getName());
+        dto.setCoupleId(wedding.getCouple().getFirst().getId());
+        //dto.setCouple(wedding.getCouple().getFirst().getUsername());
 
 
         return dto;

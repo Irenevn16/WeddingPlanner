@@ -104,10 +104,11 @@ public class CreateUsersAndRelationateTest {
             couple = coupleOpt.get();
         } else {
             couple = new Couple();
-            couple.setName("Pau");
-            couple.setUsername("pau_01");
+            couple.setName("Clara");
+            couple.setUsername("CL_01");
+            couple.setAge(27);
             // falta encriptar el password
-            couple.setPassword("1234");
+            couple.setPassword("123");
             couple = coupleRepository.save(couple);
 
         }
