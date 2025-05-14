@@ -1,1 +1,1 @@
-# WeddingPlanner
+# Wedding Planner Project
