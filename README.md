@@ -80,6 +80,8 @@ datos y una autenticación de usuarios para proteger información sensible, que 
     GET / ("/{id}/wedding") Muestra la información de la boda a la que se acude
     PATCH / ("/{id}/companion") Permite editar el acompañante a la boda
 
+Rutas actualizadas a mayo 2025.
+
     🔗 Enlaces 🔗
 -Trello: https://trello.com/invite/b/681a10787b0754ffa4a954f0/ATTI5c205d7d7c2d56b3408d6673daa8847b41589C61/weddingplanner.
 
